@@ -27,6 +27,8 @@ body {
   overflow-x: hidden;
 }
 
+/* ...TITLE... */
+
 h1.glow {  
   font-family: 'Share Tech Mono', monospace;
   font-size: 3rem;
@@ -34,27 +36,92 @@ h1.glow {
   text-shadow: 0 0 10px var(--ultra);
   margin: 0;
 }
-
-.glow {
-  animation: pulse 3s ease-in-out infinite;
+.glitch-title {
+  position: relative;
+  color: var(--glitch);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 2.5rem;
+  text-shadow: 2px 0 var(--ultra), -2px 0 var(--rose);
+  animation: glitch-skew 2.5s infinite steps(1, end);
+  overflow: hidden;
 }
 
-@keyframes pulse {
-  0%, 100% {
-    text-shadow: 0 0 5px var(--ultra);
-  }
-  50% {
-    text-shadow: 0 0 20px var(--ultra), 0 0 40px var(--rose);
-  }
+.glitch-title::before,
+.glitch-title::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  color: var(--glitch);
+  z-index: 1;
 }
+
+.glitch-title::before {
+  text-shadow: 2px 0 var(--ultra);
+  animation: glitch-anim 2.5s infinite linear alternate-reverse;
+  top: 0;
+}
+
+.glitch-title::after {
+  text-shadow: -2px 0 var(--rose);
+  animation: glitch-anim2 2.5s infinite linear alternate-reverse;
+  top: 0;
+}
+
+@keyframes glitch-anim {
+  0% { clip-path: inset(0 0 80% 0); }
+  10% { clip-path: inset(0 0 60% 0); }
+  20% { clip-path: inset(0 0 40% 0); }
+  30% { clip-path: inset(0 0 20% 0); }
+  40%, 100% { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes glitch-anim2 {
+  0% { clip-path: inset(80% 0 0 0); }
+  10% { clip-path: inset(60% 0 0 0); }
+  20% { clip-path: inset(40% 0 0 0); }
+  30% { clip-path: inset(20% 0 0 0); }
+  40%, 100% { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes glitch-skew {
+  0%, 100% { transform: skew(0deg); }
+  5% { transform: skew(5deg); }
+  10% { transform: skew(-5deg); }
+  15% { transform: skew(3deg); }
+  20% { transform: skew(-2deg); }
+  25% { transform: skew(1deg); }
+  30%, 95% { transform: skew(0deg); }
+}
+/* ...TITLE... */
 
 .subtext {
+  background: #1f2833;
+  box-shadow: 0 0 10px rgba(102, 252, 241, 0.3);
+  border-radius: 8px;
+  margin: 2rem auto;
+  padding: 1rem;
   font-family: 'Share Tech Mono', monospace;
   font-size: 1rem;
   color: var(--silver);
   margin-top: 1rem;
   text-align: center;
   max-width: 600px;
+}
+
+.console-feed {
+  background: #1f2833;
+  padding: 1rem;
+  max-width: 600px;
+  margin: 2rem auto;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #66fcf1;
+  box-shadow: 0 0 10px rgba(102, 252, 241, 0.3);
+  font-family: 'Share Tech Mono', monospace;
+  height: 150px;
+  overflow-y: hidden;
 }
 
 .story p {
@@ -79,14 +146,17 @@ p.glitch {
   text-align: left;
 }
 
-.glitch {
+.glitch-footer {
   color: var(--error);
   animation: glitch 1.5s infinite;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(102, 252, 241, 0.3);
+  background: black;
 }
 
 .chatbot-bubble {
   position: fixed;
-  bottom: 500px;
+  bottom: 450px;
   right: 10px;
   background-image: url(images/ominous_eye.gif);
   background-position: center;
@@ -109,20 +179,6 @@ p.glitch {
 .chatbot-body {
   color: #c5c6c7;
   font-style: italic;
-}
-
-.console-feed {
-  background: #1f2833;
-  padding: 1rem;
-  max-width: 600px;
-  margin: 2rem auto;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  color: #66fcf1;
-  box-shadow: 0 0 10px rgba(102, 252, 241, 0.3);
-  font-family: 'Share Tech Mono', monospace;
-  height: 150px;
-  overflow-y: hidden;
 }
 
 .console-line {
@@ -163,3 +219,5 @@ p.glitch {
   80% { transform: translate(1px, -1px); }
   100% { transform: translate(0); }
 }
+
+
